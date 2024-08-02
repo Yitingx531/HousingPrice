@@ -7,6 +7,16 @@ export class ZillowService {
     private readonly ZILLOW_API_BASE_URL = process.env.ZILLOW_API_BASE_URL;
     private readonly ZILLOW_API_HOST = process.env.ZILLOW_API_HOST;
 
+     /**
+     * Searches for properties based on the given location, status, and sort selection.
+     * 
+     * @param location - The location to search properties in (e.g., neighborhood, city, or ZIP code).
+     * @param status - The status of the properties to search for (default is 'forSale').
+     * @param sortSelection - The criteria to sort the search results by (default is 'priorityscore').
+     * @returns A promise that resolves to the search results.
+     * @throws An error if the API call fails.
+     */
+
     async searchProperties(location: string, status: string = 'forSale', sortSelection: string = 'priorityscore') {
         try {
             const response = await axios.get(`${this.ZILLOW_API_BASE_URL}/search`, {
@@ -21,11 +31,10 @@ export class ZillowService {
                     'X-RapidAPI-Key': this.RAPIDAPI_KEY,
                 },
             });
-            console.log('API Response:', response.data);
-            return response.data;
+            console.log('results', response.data.results)
+            return response.data.results; 
         } catch (error) {
-            console.error('Error in ZillowService:', error.response ? error.response.data : error.message);
-            throw error;
+            throw new error;
         }
     }
 }
