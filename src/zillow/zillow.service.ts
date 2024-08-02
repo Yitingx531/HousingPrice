@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { propertyDataFilter } from 'src/utils/propertyDataFilter';
+import { SearchPropertyRequestDto } from './dto/search-property-request.dto';
+import { SearchPropertyResponseDto } from './dto/search-property-response.dto';
 
 @Injectable()
 export class ZillowService {
@@ -17,22 +20,24 @@ export class ZillowService {
      * @throws An error if the API call fails.
      */
 
-    async searchProperties(location: string, status: string = 'forSale', sortSelection: string = 'priorityscore') {
+    async searchProperties(searchRequestDto: SearchPropertyRequestDto): Promise<SearchPropertyResponseDto[]> {
         try {
             const response = await axios.get(`${this.ZILLOW_API_BASE_URL}/search`, {
                 params: {
-                    location,
+                    location: searchRequestDto.location,
                     output: 'json',
-                    status,
-                    sortSelection
+                    status: searchRequestDto.status || 'forSale',
+                    sortSelection: searchRequestDto.sortSelection || 'priorityscore'
                 },
                 headers: {
                     'X-RapidAPI-Host': this.ZILLOW_API_HOST,
                     'X-RapidAPI-Key': this.RAPIDAPI_KEY,
                 },
             });
-            console.log('results', response.data.results)
-            return response.data.results; 
+            console.log(response.data.results)
+            const filteredData = propertyDataFilter(response.data.results);
+            console.log('filtered data', filteredData)
+            return filteredData as SearchPropertyResponseDto[]; 
         } catch (error) {
             throw new error;
         }
