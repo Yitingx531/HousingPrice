@@ -3,12 +3,15 @@ import axios from 'axios';
 import { propertyDataFilter } from 'src/utils/propertyDataFilter';
 import { SearchPropertyRequestDto } from './dto/search-property-request.dto';
 import { SearchPropertyResponseDto } from './dto/search-property-response.dto';
+import { PropertyService } from './DBservices/property.service';
 
 @Injectable()
 export class ZillowService {
     private readonly RAPIDAPI_KEY = process.env.ZILLOW_API_KEY;
     private readonly ZILLOW_API_BASE_URL = process.env.ZILLOW_API_BASE_URL;
     private readonly ZILLOW_API_HOST = process.env.ZILLOW_API_HOST;
+
+    constructor(private readonly propertyService: PropertyService){};
 
      /**
      * Searches for properties based on the given location, status, and sort selection.
@@ -34,11 +37,15 @@ export class ZillowService {
                     'X-RapidAPI-Key': this.RAPIDAPI_KEY,
                 },
             });
-            console.log(response.data.results)
+
             const filteredData = propertyDataFilter(response.data.results);
-            console.log('filtered data', filteredData)
+            // console.log('filtered data', filteredData)
+
+            await this.propertyService.storeFilteredData(filteredData);
+
             return filteredData as SearchPropertyResponseDto[]; 
         } catch (error) {
+            console.error('Error occurred while searching properties:', error.message)
             throw new error;
         }
     }
