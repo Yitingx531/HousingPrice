@@ -61,7 +61,7 @@ export class PropertyService {
               },
     
           });
-          console.log('result,', result)
+        //   console.log('result,', result)
       }
   }
 }

@@ -40,7 +40,7 @@ export class ZillowService {
 
             const filteredData = propertyDataFilter(response.data.results);
             // console.log('filtered data', filteredData)
-
+            console.log('lengthmmmm', filteredData.length )
             await this.propertyService.storeFilteredData(filteredData);
 
             return filteredData as SearchPropertyResponseDto[]; 
