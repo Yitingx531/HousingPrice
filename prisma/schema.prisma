@@ -10,30 +10,30 @@ datasource db {
 }
 
 model Property {
-  id                Int     @id @default(autoincrement())
-  createdAt         DateTime @default(now())
-  bathrooms         Int
-  bedrooms          Int
-  city              String
-  country           String
-  homeStatus        String
-  homeType          String
-  imgSrc            String
-  isUnmappable      Boolean
-  latitude          Float
-  livingArea        Float
-  longitude         Float
-  lotAreaUnit       String
-  lotAreaValue      Float
-  price             Float
-  priceForHDP       Float
-  rentZestimate     Float
-  state             String
-  streetAddress     String
-  taxAssessedValue  Float
-  zestimate         Float
-  zipcode           String
-  zpid              Int     @unique
+  id               Int      @id @default(autoincrement())
+  createdAt        DateTime @default(now())
+  bathrooms        Int
+  bedrooms         Int
+  city             String
+  country          String
+  homeStatus       String
+  homeType         String
+  imgSrc           String
+  isUnmappable     Boolean
+  latitude         Float
+  livingArea       Float
+  longitude        Float
+  lotAreaUnit      String
+  lotAreaValue     Float
+  price            Float
+  priceForHDP      Float
+  rentZestimate    Float
+  state            String
+  streetAddress    String
+  taxAssessedValue Float
+  zestimate        Float
+  zipcode          String
+  zpid             Int      @unique
 
-   @@schema("property")
+  @@schema("property")
 }

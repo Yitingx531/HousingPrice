@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: price_prophet_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-price_prophet}
+      POSTGRES_USER: ${DB_USER:-priceprophet}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-priceprophet}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
