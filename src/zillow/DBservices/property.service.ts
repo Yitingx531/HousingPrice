@@ -34,6 +34,7 @@ export class PropertyService {
                   taxAssessedValue: property.taxAssessedValue ?? 0,
                   zestimate: property.zestimate ?? 0,
                   zipcode: property.zipcode ?? 'Unknown',
+                  createdAt: new Date()
               },
               create: {
                   bathrooms: property.bathrooms ?? 0,
@@ -58,6 +59,7 @@ export class PropertyService {
                   zestimate: property.zestimate ?? 0,
                   zipcode: property.zipcode ?? 'Unknown',
                   zpid: property.zpid,
+                  createdAt: new Date()
               },
     
           });
