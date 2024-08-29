@@ -6,7 +6,7 @@ import { SearchPropertyResponseDto } from '../dto/search-property-response.dto';
 export class PropertyService {
     constructor(private readonly prisma: PrismaService){};
     
-    async storeFilteredData(filteredData: SearchPropertyResponseDto[]): Promise<void> {
+    async storePropertyData(filteredData: SearchPropertyResponseDto[]): Promise<void> {
       for (const property of filteredData) {
           const result = await this.prisma.property.upsert({
               where: {

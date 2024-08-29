@@ -1,15 +1,23 @@
-import FilteredPropertyData from '../interfaces/filteredPropertyData';
-
-export class SearchPropertyResponseDto implements FilteredPropertyData {
+export class SearchPropertyResponseDto {
     bathrooms: number;
     bedrooms: number;
     city: string;
     country: string;
+    currency: string;
+    daysOnZillow: number;
     homeStatus: string;
+    homeStatusForHDP: string;
     homeType: string;
     imgSrc: string;
+    isFeatured: boolean;
+    isNonOwnerOccupied: boolean;
+    isPreforeclosureAuction: boolean;
+    isPremierBuilder: boolean;
+    isShowcaseListing: boolean;
     isUnmappable: boolean;
+    isZillowOwned: boolean;
     latitude: number;
+    listing_sub_type: { is_FSBA: boolean };
     livingArea: number;
     longitude: number;
     lotAreaUnit: string;
@@ -17,6 +25,7 @@ export class SearchPropertyResponseDto implements FilteredPropertyData {
     price: number;
     priceForHDP: number;
     rentZestimate: number;
+    shouldHighlight: boolean;
     state: string;
     streetAddress: string;
     taxAssessedValue: number;

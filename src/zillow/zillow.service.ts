@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { propertyDataFilter } from 'src/utils/propertyDataFilter';
 import { SearchPropertyRequestDto } from './dto/search-property-request.dto';
 import { SearchPropertyResponseDto } from './dto/search-property-response.dto';
 import { PropertyService } from './DBservices/property.service';
+import { PropertyDetailResponseDto } from './dto/property-detail-response.dto';
+import { PropertyDetailRequestDto } from './dto/property-detail-request.dto';
 
 @Injectable()
 export class ZillowService {
@@ -14,7 +15,7 @@ export class ZillowService {
     constructor(private readonly propertyService: PropertyService){};
 
      /**
-     * Searches for properties based on the given location, status, and sort selection.
+     * Searches for properties based on the given location, status, and sort selection. 
      * 
      * @param location - The location to search properties in (e.g., neighborhood, city, or ZIP code).
      * @param status - The status of the properties to search for (default is 'forSale').
@@ -38,15 +39,35 @@ export class ZillowService {
                 },
             });
 
-            const filteredData = propertyDataFilter(response.data.results);
+            const propertyData = response.data.results;
             // console.log('filtered data', filteredData)
-            console.log('lengthmmmm', filteredData.length )
-            await this.propertyService.storeFilteredData(filteredData);
+            console.log('lengthmmmm', propertyData.length )
+            await this.propertyService.storePropertyData(propertyData);
 
-            return filteredData as SearchPropertyResponseDto[]; 
+            return propertyData as SearchPropertyResponseDto[]; 
         } catch (error) {
-            console.error('Error occurred while searching properties:', error.message)
-            throw new error;
+            throw new error('Error occurred while searching properties:', error.message);
+        }
+    }
+
+     async getPropertyDetails(propertyDetailRequestDto: PropertyDetailRequestDto): Promise<PropertyDetailResponseDto> {
+        try {
+            const response = await axios.get(`${this.ZILLOW_API_BASE_URL}/propertyV2`, {
+                params: {
+                    zpid: propertyDetailRequestDto.zpid,
+                },
+                headers: {
+                    'X-RapidAPI-Host': this.ZILLOW_API_HOST,
+                    'X-RapidAPI-Key': this.RAPIDAPI_KEY,
+                },
+            });
+
+            const propertyDetails = response.data;
+            console.log(propertyDetails)
+
+            return propertyDetails as PropertyDetailResponseDto;
+        } catch (error) {
+            throw new error('Error occurred while fetching property details:', error.message);;
         }
     }
 }

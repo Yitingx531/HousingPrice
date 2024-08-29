@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ZillowService } from './zillow.service';
 import { SearchPropertyRequestDto } from './dto/search-property-request.dto';
 import { SearchPropertyResponseDto } from './dto/search-property-response.dto';
+import { PropertyDetailRequestDto } from './dto/property-detail-request.dto';
+import { PropertyDetailResponseDto } from './dto/property-detail-response.dto';
 
 @Controller('zillow')
 export class ZillowController {
@@ -17,5 +19,16 @@ export class ZillowController {
     @Get('search')
     async searchProperties(@Query() searchPropertyRequestDto:SearchPropertyRequestDto): Promise<SearchPropertyResponseDto[]> {
         return this.zillowService.searchProperties(searchPropertyRequestDto);
+    }
+
+    /**
+     * Get the detailed info of one property
+     * @param propertyDetailRequestDto : zpid
+     * @returns detailed info related to one property
+     */
+   
+    @Get('property-details')
+    async getPropertyDetails(@Query() propertyDetailRequestDto: PropertyDetailRequestDto): Promise<PropertyDetailResponseDto> {
+        return this.zillowService.getPropertyDetails(propertyDetailRequestDto);
     }
 }
