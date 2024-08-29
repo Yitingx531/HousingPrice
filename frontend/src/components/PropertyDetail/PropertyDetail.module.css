@@ -1,0 +1,79 @@
+.propertyDetailsContainer{
+   padding: 2rem;
+}
+
+.propertyImageContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .propertyImageContainer img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .propertyImageContainer div:nth-child(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  .propertyImageContainer div:nth-child(2),
+  .propertyImageContainer div:nth-child(3),
+  .propertyImageContainer div:nth-child(4),
+  .propertyImageContainer div:nth-child(5) {
+    grid-column: span 1;
+  }
+  
+  .seeAllPhotos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  .seeAllButton {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .propertyDetailSection {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    font-size:1rem;
+}
+
+.mapButton {
+    background-color: #836fa1; 
+    color: #fff;
+    border: none;
+    border-radius: 1.5625rem;
+    padding: 0.625rem 1.25rem;
+    margin-left: 0.625rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.mapButton:hover {
+    background-color: #ffffff;
+    color: #836fa1;
+    border: 1px solid #836fa1;
+}
+  
+.mapButton:active {
+    background-color: #b07fcf;
+}
+  
