@@ -55,7 +55,7 @@ export const PropertiesProvider: React.FC<PropertiesProviderProps> = ({ children
 
     if (searchTerm) {
       fetchProperties();
-    }
+    } 
   }, [searchTerm]);
 
   const contextValue: PropertiesContextValue = {

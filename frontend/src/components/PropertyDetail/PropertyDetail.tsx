@@ -60,7 +60,7 @@ const PropertyDetail: React.FC = () => {
       
       {/* Conditionally render the map */}
       {showMap && (
-        <Map longitude={property.longitude} latitude={property.latitude} />
+        <Map propertyLongitude={property.longitude} propertyLatitude={property.latitude} />
       )}
     </div>
   );

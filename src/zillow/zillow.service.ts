@@ -15,7 +15,7 @@ export class ZillowService {
     constructor(private readonly propertyService: PropertyService){};
 
      /**
-     * Searches for properties based on the given location, status, and sort selection. 
+     * Searches for properties based on the given location, optional: (status, and sort selection) 
      * 
      * @param location - The location to search properties in (e.g., neighborhood, city, or ZIP code).
      * @param status - The status of the properties to search for (default is 'forSale').
@@ -40,8 +40,7 @@ export class ZillowService {
             });
 
             const propertyData = response.data.results;
-            // console.log('filtered data', filteredData)
-            console.log('lengthmmmm', propertyData.length )
+            // store properties in our DB
             await this.propertyService.storePropertyData(propertyData);
 
             return propertyData as SearchPropertyResponseDto[]; 
@@ -50,6 +49,11 @@ export class ZillowService {
         }
     }
 
+    /**
+     * Get the detailed information of one property with zpid provided
+     * @param propertyDetailRequestDto
+     * @returns detailed info of one property
+     */
      async getPropertyDetails(propertyDetailRequestDto: PropertyDetailRequestDto): Promise<PropertyDetailResponseDto> {
         try {
             const response = await axios.get(`${this.ZILLOW_API_BASE_URL}/propertyV2`, {
