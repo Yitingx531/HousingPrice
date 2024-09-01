@@ -57,7 +57,7 @@
 }
 
 .mapButton {
-    background-color: #836fa1; 
+    background-color: #027e8b; 
     color: #fff;
     border: none;
     border-radius: 1.5625rem;
@@ -69,11 +69,11 @@
   
 .mapButton:hover {
     background-color: #ffffff;
-    color: #836fa1;
-    border: 1px solid #836fa1;
+    color: #027e8b;
+    border: 1px solid #027e8b;
 }
   
 .mapButton:active {
-    background-color: #b07fcf;
+    background-color: #027e8b;
 }
   

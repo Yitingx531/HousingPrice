@@ -20,7 +20,7 @@ const PaginationButton: React.FC = () => {
        value='prev' 
        disabled={page <= 1} 
        onClick={handlePageClick}
-       >&laquo; Previous
+       >&laquo; Prev
        </button>
        <span>{page}</span>
        <button 

@@ -9,10 +9,17 @@
 
 .paginationButton{
     padding: 0.5rem 1rem;
-    
-
+    background-color: #027e8b;
+    outline: none;
+    border-radius: 15px;
+    color: white;
+    font-size: 1rem;
+    border: none;
 }
 
 .paginationButton:hover{
     cursor: pointer;
+    background-color: white;
+    color:  #027e8b;
+    border: 1px solid  #027e8b;
 }

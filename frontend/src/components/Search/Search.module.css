@@ -36,21 +36,22 @@
   }
   
   .searchButton {
-    background-color: #836fa1; 
-    color: #fff;
+    background-color: #027e8b;
+    color: #fefcfc;
     border: none;
     border-radius: 1.5625rem;
     padding: 0.625rem 1.25rem;
     margin-left: 0.625rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 1.2rem;
 }
   
 .searchButton:hover {
     background-color: #ffffff;
-    color: #836fa1;
+    color: #026873;
 }
   
 .searchButton:active {
-    background-color: #b07fcf;
+    background-color: #026873;
 }
