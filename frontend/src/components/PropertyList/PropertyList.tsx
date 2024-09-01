@@ -4,12 +4,12 @@ import Map from '../Map/Map';
 import styles from './PropertyList.module.css'
 import { useProperties } from '../../context/PropertiesContext';
 import { SearchPropertyResponseDto } from '../../../../src/zillow/dto/search-property-response.dto';
+import PaginationButtonSection from '../PaginationButton/PaginationButtonSection';
 
 const PropertyList: React.FC = () => {
     const { properties, loading } = useProperties();
 
     if(loading) return <p>Loading properties...</p>;
-    
   return (
     <div>
       {!loading && properties && (
@@ -19,8 +19,10 @@ const PropertyList: React.FC = () => {
           ))}
         </div>
       )}
-      {!properties && <Map />}
 
+      {!properties && <Map />}
+      {!loading && properties &&<PaginationButtonSection />}
+      
     </div>
   );
 };

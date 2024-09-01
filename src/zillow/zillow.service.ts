@@ -31,7 +31,8 @@ export class ZillowService {
                     location: searchRequestDto.location,
                     output: 'json',
                     status: searchRequestDto.status || 'forSale',
-                    sortSelection: searchRequestDto.sortSelection || 'priorityscore'
+                    sortSelection: searchRequestDto.sortSelection || 'priorityscore',
+                    page: searchRequestDto.page || 1,
                 },
                 headers: {
                     'X-RapidAPI-Host': this.ZILLOW_API_HOST,
@@ -39,7 +40,8 @@ export class ZillowService {
                 },
             });
 
-            const propertyData = response.data.results;
+            const propertyData = response.data.results; 
+            console.log(`${response.data.results.length} pieces of data`)
             // store properties in our DB
             await this.propertyService.storePropertyData(propertyData);
 

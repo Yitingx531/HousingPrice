@@ -10,6 +10,8 @@ interface PropertiesContextValue {
   setSearchTerm: (term: string) => void;
   properties: SearchPropertyResponseDto[] | null;
   loading: boolean;
+  page: number;
+  setPage: (page: number) => void;
 }
 
 const PropertiesContext = createContext<PropertiesContextValue | undefined>(undefined);
@@ -25,6 +27,7 @@ export const useProperties = () => {
 export const PropertiesProvider: React.FC<PropertiesProviderProps> = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [properties, setProperties] = useState<SearchPropertyResponseDto[] | null>(null);
+  const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,9 +36,11 @@ export const PropertiesProvider: React.FC<PropertiesProviderProps> = ({ children
       try {
         const params = new URLSearchParams({
           location: searchTerm,
+          page: page.toString(),
           output: 'json',
           status: 'forSale',
-          sortSelection: 'priorityscore'
+          sortSelection: 'priorityscore',
+          
         });
 
         const response = await fetch(`http://localhost:4000/zillow/search?${params}`);
@@ -56,13 +61,15 @@ export const PropertiesProvider: React.FC<PropertiesProviderProps> = ({ children
     if (searchTerm) {
       fetchProperties();
     } 
-  }, [searchTerm]);
+  }, [searchTerm, page]);
 
   const contextValue: PropertiesContextValue = {
     searchTerm,
     setSearchTerm,
     properties,
-    loading
+    loading,
+    page, 
+    setPage
   };
 
   return (
