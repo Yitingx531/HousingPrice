@@ -3,7 +3,7 @@ import { PrismaService } from 'src/prisma.service';
 import { SearchPropertyResponseDto } from '../dto/search-property-response.dto';
 
 @Injectable()
-export class PropertyService {
+export class PropertyDBService {
     constructor(private readonly prisma: PrismaService){};
     
     async storePropertyData(filteredData: SearchPropertyResponseDto[]): Promise<void> {

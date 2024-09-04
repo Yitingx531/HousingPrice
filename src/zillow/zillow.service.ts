@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { SearchPropertyRequestDto } from './dto/search-property-request.dto';
 import { SearchPropertyResponseDto } from './dto/search-property-response.dto';
-import { PropertyService } from './DBservices/property.service';
+import { PropertyDBService } from './DBservices/propertyDB.service';
 import { PropertyDetailResponseDto } from './dto/property-detail-response.dto';
 import { PropertyDetailRequestDto } from './dto/property-detail-request.dto';
 
@@ -12,10 +12,10 @@ export class ZillowService {
     private readonly ZILLOW_API_BASE_URL = process.env.ZILLOW_API_BASE_URL;
     private readonly ZILLOW_API_HOST = process.env.ZILLOW_API_HOST;
 
-    constructor(private readonly propertyService: PropertyService){};
+    constructor(private readonly propertyDBService: PropertyDBService){};
 
      /**
-     * Searches for properties based on the given location, optional: (status, and sort selection) 
+     * Searches for properties based on the given location, the location can either be neighborhood, city, or ZIP code, optional: (status, and sort selection) 
      * 
      * @param location - The location to search properties in (e.g., neighborhood, city, or ZIP code).
      * @param status - The status of the properties to search for (default is 'forSale').
@@ -32,7 +32,7 @@ export class ZillowService {
                     output: 'json',
                     status: searchRequestDto.status || 'forSale',
                     sortSelection: searchRequestDto.sortSelection || 'priorityscore',
-                    page: searchRequestDto.page || 1,
+                    page: searchRequestDto.page || 1, 
                 },
                 headers: {
                     'X-RapidAPI-Host': this.ZILLOW_API_HOST,
@@ -40,12 +40,12 @@ export class ZillowService {
                 },
             });
 
-            const propertyData = response.data.results; 
+            const propertiesData = response.data.results; 
             console.log(`${response.data.results.length} pieces of data`)
             // store properties in our DB
-            await this.propertyService.storePropertyData(propertyData);
+            await this.propertyDBService.storePropertyData(propertiesData);
 
-            return propertyData as SearchPropertyResponseDto[]; 
+            return propertiesData as SearchPropertyResponseDto[]; 
         } catch (error) {
             throw new error('Error occurred while searching properties:', error.message);
         }

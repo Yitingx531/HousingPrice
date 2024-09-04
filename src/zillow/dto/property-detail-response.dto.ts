@@ -9,5 +9,15 @@ export class PropertyDetailResponseDto {
     bathrooms: number;
     livingArea: number;
     longitude: number;
-    latitude: number;
+    latitude: number; 
+    hiResImageLink: string;
+    description: string;
+    priceHistory: PriceHistoryItem[];
+  }
+
+export interface PriceHistoryItem {
+    date: Date;
+    event: string;
+    price: number;
+    pricePerSquareFoot: number;
   }

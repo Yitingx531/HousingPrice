@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Search.module.css';
 import { useProperties } from '../../context/PropertiesContext';
+import { useNavigate } from 'react-router-dom';
 
 const Search: React.FC = () => {
   const { setSearchTerm } = useProperties();
   const [inputValue, setInputValue] = useState<string>('');
+  const navigate = useNavigate(); 
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -13,6 +15,7 @@ const Search: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchTerm(inputValue);
+    navigate('/'); // Redirect to the homepage when a search is submitted
   };
 
   return (

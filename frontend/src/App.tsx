@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import HomePage from './components/HomePage/HomePage';
-import PropertyDetail from './components/PropertyDetail/PropertyDetail';
+import PropertyDetail from './components/PropertyDetailPage/PropertyDetail';
 import { PropertiesProvider } from './context/PropertiesContext';
 
 const App: React.FC = () => {

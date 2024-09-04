@@ -1,0 +1,58 @@
+.priceHistory {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .historyGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    line-height: 2rem;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .columnTitle {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-top: -1rem;
+  }
+  
+  .list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    color: #027e8b;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    text-decoration: underline;
+  }
+  
+  .toggleButton:hover {
+    color: #015f69;
+  }
+  

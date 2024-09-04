@@ -1,0 +1,39 @@
+.aboutCard {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 1rem 0;
+    box-sizing: border-box;
+}
+
+.header {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.description {
+    letter-spacing: 0.5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    color: rgb(37, 37, 37);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.showMoreButton {
+    background: none;
+    border: none;
+    color: #027e8b;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.showMoreButton:hover {
+    color: #015f69;
+}

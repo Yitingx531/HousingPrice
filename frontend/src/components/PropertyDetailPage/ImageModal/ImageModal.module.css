@@ -1,0 +1,34 @@
+.imageModalContainer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  .closeButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .imageGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .modalImage {
+    max-width: 50%;
+    height: 50%;
+    margin-bottom: 20px;
+  }
