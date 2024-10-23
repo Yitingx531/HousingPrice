@@ -40,7 +40,6 @@ export const PropertiesProvider: React.FC<PropertiesProviderProps> = ({ children
           output: 'json',
           status: 'forSale',
           sortSelection: 'priorityscore',
-          
         });
 
         const response = await fetch(`http://localhost:4000/zillow/search?${params}`);

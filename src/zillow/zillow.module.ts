@@ -8,6 +8,6 @@ import { PropertyDBService } from './DBservices/propertyDB.service';
     imports: [],
     controllers: [ZillowController],
     providers: [ZillowService, PropertyDBService, PrismaService], 
-    exports: [ZillowService],
+    exports: [ZillowService, PropertyDBService],
 })
 export class ZillowModule {}

@@ -10,11 +10,10 @@ interface PriceHistoryProps {
 
 const PriceHistory: React.FC<PriceHistoryProps> = ({priceHistory}) => {
   const [showAll, setShowAll] = useState(false);
-  const initialDisplayCount = 2;
 
   const displayedHistory = useMemo(() => {
-    return showAll ? priceHistory : priceHistory.slice(0, initialDisplayCount);
-  }, [showAll, priceHistory, initialDisplayCount]);
+    return showAll ? priceHistory : priceHistory.slice(0, 2);
+  }, [showAll, priceHistory]);
 
   const toggleShowAll = () => {
     setShowAll(prevShowAll => !prevShowAll);
@@ -62,7 +61,7 @@ const PriceHistory: React.FC<PriceHistoryProps> = ({priceHistory}) => {
         </div>
       </div>
 
-      {priceHistory.length > initialDisplayCount && (
+      {priceHistory.length > 2 && (
         <button className={styles.toggleButton} onClick={toggleShowAll}>
           {showAll ? 'Show Less' : 'Show More'}
         </button>

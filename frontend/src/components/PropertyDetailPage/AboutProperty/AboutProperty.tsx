@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import styles from './AboutProperty.module.css';
 
 interface AboutPropertyProps {
-  description: string;
+  description: string | null;
 }
 
-const AboutProperty: React.FC<AboutPropertyProps> = ({description}) => {
+const AboutProperty: React.FC<AboutPropertyProps> = ({ description }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const wordLimit = 80;
 
-  const words = description.split(' ');
-  const truncatedDescription = words.slice(0, wordLimit).join(' ');
+  // Handle null or empty description case
+  const validDescription = description || 'Description not available';
+  const words = validDescription.split(' ');
+  const truncatedDescription = words.length > 0 ? words.slice(0, wordLimit).join(' ') : validDescription;
   const isLongDescription = words.length > wordLimit;
 
   const toggleExpand = () => {
@@ -21,7 +23,7 @@ const AboutProperty: React.FC<AboutPropertyProps> = ({description}) => {
     <div className={styles.aboutCard}>
       <p className={styles.header}>About Property</p>
       <p className={styles.description}>
-        {isExpanded ? description : truncatedDescription}
+        {isExpanded ? validDescription : truncatedDescription}
         {isLongDescription && !isExpanded && '...'}
       </p>
       {isLongDescription && (
@@ -30,7 +32,7 @@ const AboutProperty: React.FC<AboutPropertyProps> = ({description}) => {
         </button>
       )}
     </div>
-  )
+  );
 }
 
 export default AboutProperty;

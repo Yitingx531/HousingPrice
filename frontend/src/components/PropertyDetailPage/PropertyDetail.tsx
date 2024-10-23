@@ -60,6 +60,7 @@ const PropertyDetail: React.FC = () => {
           <span>{property.livingArea} Sq Ft</span>
         </div>
       </div>
+      
       <PriceHistory priceHistory={property.priceHistory}/>
       <AboutProperty description={property.description}/>
       

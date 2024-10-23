@@ -7,7 +7,7 @@
   height: 45vh;
   min-height: 300px;
   width: 100%;
-  position: relative; /* Allows for absolute positioning inside */
+  position: relative; /* absolute positioning inside */
 }
 
 .hiResImage {
@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  position: relative; /* Allows button to be positioned relative to this div */
+  position: relative; /* button to be positioned relative to this div */
 }
 
 .propertyImage {
@@ -33,19 +33,23 @@
   width: 100%;
   height: calc(50% - 5px);
   object-fit: cover;
-  position: relative; /* Allows button to be positioned within this image */
+  position: relative; /* button to be positioned within this image */
 }
 
 .morePhotoButton {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
-  z-index: 1; /* Ensure the button appears on top */
+  z-index: 1;
+}
+
+.morePhotoButton:hover{
+  background-color: rgba(0, 0, 0, 0.8);
 }

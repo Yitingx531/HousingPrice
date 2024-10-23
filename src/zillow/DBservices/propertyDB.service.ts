@@ -6,8 +6,8 @@ import { SearchPropertyResponseDto } from '../dto/search-property-response.dto';
 export class PropertyDBService {
     constructor(private readonly prisma: PrismaService){};
     
-    async storePropertyData(filteredData: SearchPropertyResponseDto[]): Promise<void> {
-      for (const property of filteredData) {
+    async storePropertyData(propertyData: SearchPropertyResponseDto[]): Promise<void> {
+      for (const property of propertyData) {
           const result = await this.prisma.property.upsert({
               where: {
                   zpid: property.zpid,
@@ -61,7 +61,9 @@ export class PropertyDBService {
               },
     
           });
-        //   console.log('result,', result)
+          console.log('property data length', propertyData
+            
+          )
       }
   }
 }

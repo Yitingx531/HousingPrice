@@ -41,7 +41,7 @@ export class ZillowService {
             });
 
             const propertiesData = response.data.results; 
-            console.log(`${response.data.results.length} pieces of data`)
+            // console.log(response.data.results)
             // store properties in our DB
             await this.propertyDBService.storePropertyData(propertiesData);
 
@@ -58,7 +58,7 @@ export class ZillowService {
      */
      async getPropertyDetails(propertyDetailRequestDto: PropertyDetailRequestDto): Promise<PropertyDetailResponseDto> {
         try {
-            const response = await axios.get(`${this.ZILLOW_API_BASE_URL}/propertyV2`, {
+            const response = await axios.get(`${this.ZILLOW_API_BASE_URL}/property`, {
                 params: {
                     zpid: propertyDetailRequestDto.zpid,
                 },
@@ -73,7 +73,8 @@ export class ZillowService {
 
             return propertyDetails as PropertyDetailResponseDto;
         } catch (error) {
-            throw new error('Error occurred while fetching property details:', error.message);;
+                console.error('Request setup error:', error.message);
+                throw new Error(`Error occurred while setting up the request: ${error.message}`);
         }
     }
 }

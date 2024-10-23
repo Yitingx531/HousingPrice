@@ -37,3 +37,34 @@ model Property {
 
   @@schema("property")
 }
+
+model HouseDetails {
+  id                 Int       @id @default(autoincrement())
+  createdAt          DateTime  @default(now())
+  price              Int
+  abbreviatedAddress String
+  city               String
+  state              String
+  zipcode            Int
+  bedrooms           Int
+  bathrooms          Int
+  livingArea         Float
+  longitude          Float
+  latitude           Float
+  hiResImageLink     String
+  description        String
+  responsivePhotos   Json      // JSON field to store an array of photo URLs
+  priceHistories     PriceHistory[]
+
+  @@schema("property")
+}
+
+model PriceHistory {
+  id         Int      @id @default(autoincrement())
+  date       DateTime
+  price      Float
+  houseId    Int      @relation(fields: [houseId], references: [id])
+  
+  @@schema("property")
+  @@index([houseId])
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './PaginationButtonSection.module.css';
 import { useProperties } from '../../context/PropertiesContext';
 
@@ -10,7 +10,7 @@ const PaginationButton: React.FC = () => {
         if(buttonValue === 'next'){
           setPage(page+1);
         } else if(buttonValue === 'prev' && page > 1){
-            setPage(page - 1);
+          setPage(page-1);
         }
     }
 
