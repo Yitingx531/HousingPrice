@@ -1,7 +1,15 @@
-.propertyListContainer{
+.searchResultsContainer{
     display: flex;
     flex-wrap: wrap;
     gap: 1rem 2rem;
     justify-content: center;
     margin-top: 2rem;
+}
+
+.propertyResult{
+    padding: 2rem;
+}
+
+.loadingDiv{
+    margin: 3rem;
 }

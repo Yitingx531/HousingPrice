@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Search.module.css';
 import { useProperties } from '../../context/PropertiesContext';
 import { useNavigate } from 'react-router-dom';
+import { SearchPropertyResponseDto } from '../../../../src/zillow/dto/search-property-response.dto';
 
 const Search: React.FC = () => {
   const { setSearchTerm } = useProperties();
@@ -11,13 +12,14 @@ const Search: React.FC = () => {
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
-
+  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchTerm(inputValue);
-    navigate('/'); // Redirect to the homepage when a search is submitted
+    navigate('/search'); // Redirect to the homepage when a search is submitted
+    setInputValue('');
   };
-
+  
   return (
     <form className={styles.searchForm} onSubmit={handleSubmit}>
       <div className={styles.inputWrapper}>
@@ -44,7 +46,7 @@ const Search: React.FC = () => {
           className={styles.searchInput}
         />
       </div>
-      <button type="submit" className={styles.searchButton}>
+      <button type="submit" className={styles.searchButton}> 
         Search
       </button>
     </form>
