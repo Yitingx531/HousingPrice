@@ -63,8 +63,19 @@ model PriceHistory {
   id         Int      @id @default(autoincrement())
   date       DateTime
   price      Float
-  houseId    Int      @relation(fields: [houseId], references: [id])
+  houseId    Int      
+  house      HouseDetails  @relation(fields: [houseId], references: [id])
   
   @@schema("property")
   @@index([houseId])
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  username    String
+  password    String
+  email       String   @unique
+  createdAt   DateTime @default(now())
+
+  @@schema("property")
 }
