@@ -9,7 +9,7 @@ export class UserDBService {
     async storeUserData(userInfo: UserInfoRequestDto): Promise<void> {
         const result = await this.prisma.user.upsert({
           where: {
-            email: userInfo.email,  // email is now recognized as unique
+            email: userInfo.email, 
           },
           update: {
             username: userInfo.username,
