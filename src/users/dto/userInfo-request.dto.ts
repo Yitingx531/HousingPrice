@@ -1,5 +1,5 @@
 export class UserInfoRequestDto {
-    userId: string;
+    id: number;
     username: string;
     email: string;
     password: string;

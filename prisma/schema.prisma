@@ -71,7 +71,7 @@ model PriceHistory {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id          Int      @id @default(autoincrement()) @unique
   username    String
   password    String
   email       String   @unique

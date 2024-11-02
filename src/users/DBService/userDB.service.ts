@@ -6,21 +6,42 @@ import { UserInfoRequestDto } from '../dto/userInfo-request.dto';
 export class UserDBService {
     constructor(private readonly prisma: PrismaService){};
     
-    async storeUserData(userInfo: UserInfoRequestDto): Promise<void> {
-        const result = await this.prisma.user.upsert({
-          where: {
-            email: userInfo.email, 
-          },
-          update: {
-            username: userInfo.username,
-            email: userInfo.email,
-            password: userInfo.password,
-          },
-          create: {
-            username: userInfo.username,
-            email: userInfo.email,
-            password: userInfo.password,
-          },
-        });
+    /**
+     * store a new user's data in the users table
+     * @param userInfo 
+     */
+    async createUser(userInfo: UserInfoRequestDto): Promise<UserInfoRequestDto> {
+        try {
+            return await this.prisma.user.create({
+                data: {
+                    username: userInfo.username,
+                    email: userInfo.email,
+                    password: userInfo.password,
+                },
+            });
+        } catch (error) {
+            if (error.code === 'P2002') { 
+                throw new Error('Email already exists');
+            }
+            throw error;
+        }
+    }
+    
+    /**
+     * update a user's info with user's email
+     * @param email 
+     * @param userInfo 
+     */
+      async updateUserInfo(id: number, userInfo:UserInfoRequestDto): Promise<Partial<UserInfoRequestDto>>{
+        return await this.prisma.user.update({
+            where: {
+                id: userInfo.id,
+            },
+            // users can't update their email
+            data: {
+                username: userInfo.username,
+                password: userInfo.password
+            }
+        })
       }
 }

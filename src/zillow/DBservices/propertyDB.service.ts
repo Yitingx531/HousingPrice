@@ -59,11 +59,9 @@ export class PropertyDBService {
                   zipcode: property.zipcode ?? 'Unknown',
                   zpid: property.zpid,
               },
-    
+
           });
-          console.log('property data length', propertyData
-            
-          )
+          console.log('property data length', propertyData)
       }
   }
 }
