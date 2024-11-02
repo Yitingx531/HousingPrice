@@ -5,13 +5,16 @@ import { UserInfoRequestDto } from './dto/userInfo-request.dto';
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
+
+    //TODO: implement error handling//
     /**
      * store a new user's data into the users table
      * @param userInfo 
      */
     @Post()
     async createUser(@Body() userInfo: UserInfoRequestDto) {
-        await this.usersService.createUser(userInfo);
+        const createdUser = await this.usersService.createUser(userInfo);
+        return createdUser;
     }
 
     /**

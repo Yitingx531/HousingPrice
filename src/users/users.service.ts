@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserInfoRequestDto } from './dto/userInfo-request.dto';
 import { UserDBService } from './DBService/userDB.service';
+import { hashPassword } from './utils/hashPassword';
 
 @Injectable()
 export class UsersService {
@@ -13,7 +14,11 @@ export class UsersService {
      */
     async createUser(userInfo: UserInfoRequestDto) {
         try {
-            const createdUser = await this.userDBService.createUser(userInfo);
+            const hashedPassword = await hashPassword(userInfo.password);
+            const createdUser = await this.userDBService.createUser({
+                ...userInfo,
+                password: hashedPassword,
+            });
             return createdUser; 
         } catch (error) {
             console.error('Error creating user:', error); // Log the detailed error

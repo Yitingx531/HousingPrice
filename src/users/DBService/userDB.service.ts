@@ -26,6 +26,7 @@ export class UserDBService {
             throw error;
         }
     }
+    //TODO:CHANGE userId type to uuid //
     
     /**
      * update a user's info with user's email
