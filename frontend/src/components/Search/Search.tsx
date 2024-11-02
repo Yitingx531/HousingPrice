@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './Search.module.css';
 import { useProperties } from '../../context/PropertiesContext';
 import { useNavigate } from 'react-router-dom';
-import { SearchPropertyResponseDto } from '../../../../src/zillow/dto/search-property-response.dto';
 
 const Search: React.FC = () => {
   const { setSearchTerm } = useProperties();

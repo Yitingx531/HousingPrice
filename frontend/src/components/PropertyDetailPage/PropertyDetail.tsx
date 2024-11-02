@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import formatPrice from '../../utils/formatPrice';
-import Map from '../Map/Map';
+import Map from '../common/Map/Map';
 import AboutProperty from './AboutProperty/AboutProperty';
 import PriceHistory from './PriceHistory/PriceHistory';
 import PropertyImages from './PropertyImages/PropertyImages';

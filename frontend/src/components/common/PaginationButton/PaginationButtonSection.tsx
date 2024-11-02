@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PaginationButtonSection.module.css';
-import { useProperties } from '../../context/PropertiesContext';
+import { useProperties } from '../../../context/PropertiesContext';
 
 const PaginationButton: React.FC = () => {
     const { properties, page, setPage } = useProperties();

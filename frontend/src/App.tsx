@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout/Layout';
+import Layout from './components/common/Layout/Layout';
 import HomePage from './components/HomePage/HomePage';
 import PropertyDetail from './components/PropertyDetailPage/PropertyDetail';
 import ContactPage from './components/ContactPage/ContactPage';
 import { PropertiesProvider } from './context/PropertiesContext';
-import SearchResults from './components/SearchResults/SearchResults';
+import SearchResults from './components/PropertySearchResultsPage/PropertySearchResults';
+import SignUp from './components/SignInSignUpPage/SignUp/SignUp';
+import SignIn from './components/SignInSignUpPage/SignIn/SignIn';
 
 
 const App: React.FC = () => {
@@ -19,6 +21,8 @@ const App: React.FC = () => {
             <Route path='/service' />
             <Route path='/search' element={<SearchResults />}></Route>
             <Route path="/property/:id" element={<PropertyDetail />} />
+            <Route path='/users/signin' element={<SignIn/>} />
+            <Route path='/users/signup' element={<SignUp/>} />
           </Route>
         </Routes>
       </PropertiesProvider>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SearchPropertyResponseDto } from '../../../../src/zillow/dto/search-property-response.dto';
+import { SearchPropertyResponseDto } from '../../../../../src/zillow/dto/search-property-response.dto';
 import styles from './PropertyCard.module.css';
-import formatPrice from '../../utils/formatPrice';
+import formatPrice from '../../../utils/formatPrice';
 
 interface PropertyCardProps {
   property: SearchPropertyResponseDto;

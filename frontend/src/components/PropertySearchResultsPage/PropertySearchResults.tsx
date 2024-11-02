@@ -1,11 +1,11 @@
 import React from 'react';
-import PropertyCard from '../PropertyCard/PropertyCard';
-import Map from '../Map/Map';
+import PropertyCard from './PropertyCard/PropertyCard';
+import Map from '../common/Map/Map';
 import styles from './SearchResults.module.css'
 import { useProperties } from '../../context/PropertiesContext';
 import { SearchPropertyResponseDto } from '../../../../src/zillow/dto/search-property-response.dto';
-import PaginationButtonSection from '../PaginationButton/PaginationButtonSection';
 import useUserLocation from '../../hooks/useUserLocation';
+import PaginationButtonSection from '../common/PaginationButton/PaginationButtonSection';
 
 const SearchResults: React.FC = () => {
     const { properties, loading, searchTerm } = useProperties();

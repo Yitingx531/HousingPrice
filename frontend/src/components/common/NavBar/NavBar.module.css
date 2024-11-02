@@ -1,0 +1,79 @@
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 1rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 4rem;
+    background-image: linear-gradient(to right, #026873, #00787e, #008986, #009a8b, #00aa8d, #00af88, #00b482, #00b97b, #00b46f, #00b063, #00ab57, #03a64a);
+  }
+  
+  .navLinks {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+    flex-grow: 1;
+  }
+  
+  .navLinks a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding: 0.625rem 0.9375rem;
+    border-radius: 1.25rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .navLinks a:hover {
+    background-color: #05bdba;
+    color: #fff; 
+  }
+  
+  .searchContainer {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 0;
+  }
+  
+  .signInSignUpContainer {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  /* Sign In Button Style */
+  .signIn {
+    text-decoration: none;
+    color: #f3fbfa;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #00aa8d;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .signIn:hover {
+    background-color: #00aa8d;
+    color: #ffffff;
+  }
+  
+  /* Sign Up Button Style */
+  .signUp {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #00b97b;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+  }
+  
+  .signUp:hover {
+    background-color: #05bdba;
+  }
+  

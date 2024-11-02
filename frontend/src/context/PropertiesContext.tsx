@@ -45,7 +45,8 @@ export const PropertiesProvider: React.FC<PropertiesProviderProps> = ({ children
         const response = await fetch(`http://localhost:4000/zillow/search?${params}`);
 
         if (!response.ok) {
-          throw new Error('Failed to fetch property data');
+          const errorDetails = `Error: ${response.status} - ${response.statusText}`
+          throw new Error(`Failed to fetch property data: ${errorDetails}`);
         }
 
         const data: SearchPropertyResponseDto[] = await response.json();
