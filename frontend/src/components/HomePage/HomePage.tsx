@@ -7,6 +7,7 @@ const HomePage: React.FC = () => {
   const {setSearchTerm, searchTerm} = useProperties();
   setSearchTerm('')
   console.log('searchTerminhomepage', searchTerm)
+  //TODO: add more sections//
 
   return (
     <div className={styles.homePage}>
