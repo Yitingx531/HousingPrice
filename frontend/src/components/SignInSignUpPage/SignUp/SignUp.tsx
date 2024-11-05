@@ -8,7 +8,7 @@ type ApiError = {
   statusCode?: number;
 };
 
-const defaultUserData = {
+const defaultUserData: UserDataType = {
   username: '',
   email: '',
   password: '',
@@ -21,37 +21,51 @@ const SignUp = () => {
   const [passwordErrorMsg, setPasswordErrorMsg] = useState<string>('');
   const [confirmPwErrorMsg, setConfirmPwErrorMsg] = useState<string>('');
   const [successMsg, setSuccessMsg] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleUserData = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = event.target;
-    setUserFormData({
-      ...userFormData,
-      [name]: value
-    });
-    
-    // clear specific error message when user starts typing in that field
-    if (name === 'email') setEmailErrorMsg('');
-    if (name === 'password') setPasswordErrorMsg('');
-    if (name === 'confirmPassword') setConfirmPwErrorMsg('');
-    // Clear success message when user starts modifying the form again
-    setSuccessMsg('');
-  }
+  const resetForm = () => {
+    setUserFormData({ ...defaultUserData });
+    setEmailErrorMsg('');
+    setPasswordErrorMsg('');
+    setConfirmPwErrorMsg('');
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // reset all error and success messages
+  const clearErrors = () => {
     setEmailErrorMsg('');
     setPasswordErrorMsg('');
     setConfirmPwErrorMsg('');
     setSuccessMsg('');
+  };
 
-    // validate form fields
+  const handleUserData = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = event.target;
+    setUserFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+    
+    // Clear specific error message when user starts typing in that field
+    if (name === 'email') setEmailErrorMsg('');
+    if (name === 'password') setPasswordErrorMsg('');
+    if (name === 'confirmPassword') setConfirmPwErrorMsg('');
+    // Clear success message when user starts modifying the form again
+    if (successMsg) setSuccessMsg('');
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    clearErrors();
+    setIsSubmitting(true);
+
+    // Validate form fields
     const errors = validateForm(userFormData);
     if (Object.keys(errors).length > 0) {
       setEmailErrorMsg(errors.email || '');
       setPasswordErrorMsg(errors.password || '');
       setConfirmPwErrorMsg(errors.confirmPassword || '');
+      setIsSubmitting(false);
       return;
     }
 
@@ -72,7 +86,6 @@ const SignUp = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        // type assertion to ensure data has the correct shape
         const errorData = data as ApiError;
         
         if (response.status === 409 || errorData.message?.toLowerCase().includes('email already exists')) {
@@ -83,17 +96,19 @@ const SignUp = () => {
         throw new Error(errorData.message || 'Failed to sign up');
       }
 
+      // Success case
+      resetForm();
       setSuccessMsg('User signed up successfully!');
-      setUserFormData(defaultUserData);
       
     } catch (error) {
       console.error('Signup error:', error);
-      // only show generic error if it's not a specific email existence error
       if (!emailErrorMsg) {
         setEmailErrorMsg('Error signing up. Please try again later.');
       }
+    } finally {
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className={styles.signUpContainer}>
@@ -107,6 +122,7 @@ const SignUp = () => {
             placeholder="username" 
             onChange={handleUserData}
             required
+            disabled={isSubmitting}
           /> 
 
           <label>Email:</label> 
@@ -118,6 +134,7 @@ const SignUp = () => {
             placeholder="example@email.com" 
             onChange={handleUserData}
             required
+            disabled={isSubmitting}
           /> 
           {emailErrorMsg && <p className={styles.errorMessage}>{emailErrorMsg}</p>}
 
@@ -130,6 +147,7 @@ const SignUp = () => {
             placeholder="password"
             onChange={handleUserData}
             required
+            disabled={isSubmitting}
           />
           {passwordErrorMsg && <p className={styles.errorMessage}>{passwordErrorMsg}</p>}
 
@@ -142,10 +160,17 @@ const SignUp = () => {
             placeholder="confirm password"
             onChange={handleUserData}
             required
+            disabled={isSubmitting}
           />
           {confirmPwErrorMsg && <p className={styles.errorMessage}>{confirmPwErrorMsg}</p>}
           
-          <button type="submit" className={styles.signUpFormButton}>Sign Up</button>
+          <button 
+            type="submit" 
+            className={styles.signUpFormButton}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Signing up...' : 'Sign Up'}
+          </button>
         </form>
         {successMsg && <p className={styles.successMsg}>{successMsg}</p>}
       </div>
