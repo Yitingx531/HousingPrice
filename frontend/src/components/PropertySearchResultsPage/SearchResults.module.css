@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     gap: 1rem 2rem;
     justify-content: center;
-    margin-top: 2rem;
+    /* padding: 1%; */
 }
 
 .propertyResult{

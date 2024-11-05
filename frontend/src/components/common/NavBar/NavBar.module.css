@@ -1,16 +1,21 @@
+.navBarWrapper{
+  width: 100%;
+  min-width: 1280px;
+  background-image: linear-gradient(to right, #026873, #00787e, #008986, #009a8b, #00aa8d, #00af88, #00b482, #00b97b, #00b46f, #00b063, #00ab57, #03a64a);
+  background-size: cover;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .navBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    gap: 1rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    height: 4rem;
-    background-image: linear-gradient(to right, #026873, #00787e, #008986, #009a8b, #00aa8d, #00af88, #00b482, #00b97b, #00b46f, #00b063, #00ab57, #03a64a);
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  padding: 0.3rem 0.5rem;
+}
   
   .navLinks {
     list-style: none;
@@ -43,6 +48,7 @@
   .signInSignUpContainer {
     display: flex;
     gap: 0.5rem;
+    white-space: nowrap;
   }
   
   /* Sign In Button Style */

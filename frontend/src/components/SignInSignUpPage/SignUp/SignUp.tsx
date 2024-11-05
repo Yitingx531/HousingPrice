@@ -15,6 +15,7 @@ const SignUp = () => {
   const [emailErrorMsg, setEmailErrorMsg] = useState<string>('');
   const [passwordErrorMsg, setPasswordErrorMsg] = useState<string>('');
   const [confirmPwErrorMsg, setConfirmPwErrorMsg] = useState<string>('');
+  const [successMsg, setSuccessMsg] = useState<string>('');
 
   const handleUserData = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
@@ -73,6 +74,9 @@ const SignUp = () => {
         password: userFormData.password,
       })
     });
+
+    setSuccessMsg('User signed up successfully!');
+
     if (!response.ok) {
       throw new Error('Failed to sign up');
     }
@@ -131,6 +135,7 @@ const SignUp = () => {
           <button type="submit" className={styles.signUpFormButton}>Sign Up</button>
 
         </form>
+        {successMsg && <p className={styles.successMsg}>{successMsg}</p>}
       </div>
     </div>
   )};

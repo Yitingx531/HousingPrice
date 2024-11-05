@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const NavBar: React.FC = () => {
 
   return (
+    <div className={styles.navBarWrapper}>
     <nav className={styles.navBar}>
       <div className={styles.navLinks}>
       <Link to="/">Home</Link>
@@ -21,6 +22,7 @@ const NavBar: React.FC = () => {
       <Link className={styles.signUp} to="/users/signup">Sign Up</Link>
       </div>
     </nav>
+    </div>
   );
 }
 

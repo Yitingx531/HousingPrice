@@ -16,7 +16,7 @@ export class ZillowController {
      * @param sortSelection 
      * @returns 
      */
-    @Get('search')
+    @Get('search') 
     async searchProperties(@Query() searchPropertyRequestDto:SearchPropertyRequestDto): Promise<SearchPropertyResponseDto[]> {
         return this.zillowService.searchProperties(searchPropertyRequestDto);
     }
