@@ -41,13 +41,17 @@ export class ZillowService {
             });
 
             const propertiesData = response.data.results; 
-            // console.log(response.data.results)
+            console.log('propertyDatainZillowService',response.data.results)
             // store properties in our DB
             await this.propertyDBService.storePropertyData(propertiesData);
 
             return propertiesData as SearchPropertyResponseDto[]; 
         } catch (error) {
-            throw new error('Error occurred while searching properties:', error.message);
+            if (error instanceof Error) {
+                throw new Error(`Error occurred while searching properties: ${error.message}`);
+            }
+            throw new Error('An unknown error occurred while searching properties.');
+        
         }
     }
 
@@ -73,8 +77,11 @@ export class ZillowService {
 
             return propertyDetails as PropertyDetailResponseDto;
         } catch (error) {
+            if (error instanceof Error) {
                 console.error('Request setup error:', error.message);
                 throw new Error(`Error occurred while setting up the request: ${error.message}`);
+            }
+            throw new Error('An unknown error occurred while setting up the request.');
         }
     }
 }

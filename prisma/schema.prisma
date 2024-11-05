@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Property {
-  id               Int      @id @default(autoincrement())
+  id               String   @id @default(uuid())
   createdAt        DateTime @default(now())
   bathrooms        Int
   bedrooms         Int
@@ -39,8 +39,8 @@ model Property {
 }
 
 model HouseDetails {
-  id                 Int       @id @default(autoincrement())
-  createdAt          DateTime  @default(now())
+  id                 String   @id @default(uuid())
+  createdAt          DateTime @default(now())
   price              Int
   abbreviatedAddress String
   city               String
@@ -60,10 +60,10 @@ model HouseDetails {
 }
 
 model PriceHistory {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(uuid())
   date       DateTime
   price      Float
-  houseId    Int      
+  houseId    String
   house      HouseDetails  @relation(fields: [houseId], references: [id])
   
   @@schema("property")
@@ -71,7 +71,7 @@ model PriceHistory {
 }
 
 model User {
-  id          Int      @id @default(autoincrement()) @unique
+  id          String   @id @default(uuid())
   username    String
   password    String
   email       String   @unique

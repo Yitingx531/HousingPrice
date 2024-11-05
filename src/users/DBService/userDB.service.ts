@@ -30,10 +30,10 @@ export class UserDBService {
     
     /**
      * update a user's info with user's email
-     * @param email 
+     * @param id 
      * @param userInfo 
      */
-      async updateUserInfo(id: number, userInfo:UserInfoRequestDto): Promise<Partial<UserInfoRequestDto>>{
+      async updateUserInfo(id: string, userInfo:UserInfoRequestDto): Promise<Partial<UserInfoRequestDto>>{
         return await this.prisma.user.update({
             where: {
                 id: userInfo.id,
