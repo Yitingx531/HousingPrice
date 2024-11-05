@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserInfoRequestDto } from './dto/userInfo-request.dto';
 import { UserDBService } from './DBService/userDB.service';
 import { hashPassword } from './utils/hashPassword';
+import { todo } from 'node:test';
 
 @Injectable()
 export class UsersService {
@@ -15,6 +16,8 @@ export class UsersService {
     async createUser(userInfo: UserInfoRequestDto) {
         try {
             const hashedPassword = await hashPassword(userInfo.password);
+            //TODO: check if the email already exists in the db//
+            
             const createdUser = await this.userDBService.createUser({
                 ...userInfo,
                 password: hashedPassword,
@@ -25,5 +28,6 @@ export class UsersService {
             throw new Error('Failed to create user: ' + error.message);
         }
      }
+
      
 }
