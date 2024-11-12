@@ -8,7 +8,7 @@ export class AuthController {
     constructor(private authService: AuthService){}
 
     @Post('signin')
-    async userSignIn(@Body() signInDto: SignInDto): Promise<UserInfoResponseDto>{
+    async userSignIn(@Body() signInDto: SignInDto): Promise<{access_token: string}>{
         return this.authService.userSignIn(signInDto);
     }   
 }

@@ -56,19 +56,15 @@ export class UserDBService {
         }
     }
 
-    async authUser(email: string, password: string): Promise<UserInfoResponseDto | string> {
+    async authUser(email: string, password: string): Promise<UserInfoResponseDto> {
         try{
             const user = await this.prisma.user.findUnique({
                 where:  { email },
             })
-             if (!user){
-                return ('Invalid email or password.');
-             }
              const isPwValid = await bcrypt.compare(password, user.password)
-             if(!isPwValid){
-                return ('Invalid email or password.');
+             if (!user || !isPwValid){
+                throw new Error('Invalid email or password.');
              }
-
              const userInfoResponse: UserInfoResponseDto = {
                 email: user.email,
                 username: user.username,

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './SignIn.module.css';
 import {AuthError, NetworkError, APIError, handleAPIResponse} from '../../../types/errorTypes';
 import { AuthResponse } from '../../../types/authResponse';
+import { useNavigate } from 'react-router-dom';
 
 type SignInFormData = {
   email: string | '',
@@ -16,6 +17,8 @@ const defaultFormData = {
 const SignIn: React.FC = () => {
   const [signInFormData, setSignInFormData] = useState<SignInFormData>(defaultFormData);
   const [errorMsg, setErrorMsg] = useState<string>('');
+
+  const navigate = useNavigate();
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const {name, value} = event.target;
@@ -42,7 +45,8 @@ const SignIn: React.FC = () => {
     });
     console.log('response', response)
     const responseData = await handleAPIResponse<AuthResponse>(response);
-    console.log('responseData',  responseData)
+    console.log('signin success',  responseData);
+    navigate('/');
     } catch(error: unknown) {
       if(error instanceof AuthError){
         setErrorMsg('Invalid email or password');
