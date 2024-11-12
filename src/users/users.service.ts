@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserInfoRequestDto } from './dto/userInfo-request.dto';
 import { UserDBService } from './DBService/userDB.service';
-import { hashPassword } from './utils/hashPassword';
-import { todo } from 'node:test';
+import { hashPassword } from '../utils/hashPassword';
 
 @Injectable()
 export class UsersService {

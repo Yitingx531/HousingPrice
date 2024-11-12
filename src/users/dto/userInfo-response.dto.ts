@@ -1,6 +1,4 @@
-export class UserInfoResponseDto {
-    userId: string;
+export class UserInfoResponseDto{
     username: string;
     email: string;
-    password: string;
   }

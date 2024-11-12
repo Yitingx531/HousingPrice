@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { UserInfoRequestDto } from '../dto/userInfo-request.dto';
+import { UserInfoResponseDto } from '../dto/userInfo-response.dto';
 import { ConflictException, NotFoundException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserDBService {
@@ -51,6 +53,30 @@ export class UserDBService {
                 throw new NotFoundException('User not found');
             }
             throw error;
+        }
+    }
+
+    async authUser(email: string, password: string): Promise<UserInfoResponseDto | string> {
+        try{
+            const user = await this.prisma.user.findUnique({
+                where:  { email },
+            })
+             if (!user){
+                return ('Invalid email or password.');
+             }
+             const isPwValid = await bcrypt.compare(password, user.password)
+             if(!isPwValid){
+                return ('Invalid email or password.');
+             }
+
+             const userInfoResponse: UserInfoResponseDto = {
+                email: user.email,
+                username: user.username,
+             }
+             return userInfoResponse;
+        }catch(error){
+            console.log(`Authentication error: ${error.message}`);
+            throw new Error('Authentication failed');
         }
     }
 }

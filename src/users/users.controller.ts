@@ -1,11 +1,10 @@
-import { Controller, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Post, Put, Body, Param, Query, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserInfoRequestDto } from './dto/userInfo-request.dto';
 
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
-
     //TODO: implement error handling//
     /**
      * store a new user's data into the users table
