@@ -8,6 +8,7 @@ import { PropertiesProvider } from './context/PropertiesContext';
 import SearchResults from './components/PropertySearchResultsPage/PropertySearchResults';
 import SignUp from './components/SignInSignUpPage/SignUp/SignUp';
 import SignIn from './components/SignInSignUpPage/SignIn/SignIn';
+import Me from './components/Me/Me';
 
 
 const App: React.FC = () => {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
             <Route path="/property/:id" element={<PropertyDetail />} />
             <Route path='/users/signin' element={<SignIn/>} />
             <Route path='/users/signup' element={<SignUp/>} />
+            <Route path='/users/me' element={<Me/>} />
           </Route>
         </Routes>
       </PropertiesProvider>

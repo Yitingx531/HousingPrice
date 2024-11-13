@@ -46,7 +46,7 @@ const SignIn: React.FC = () => {
     console.log('response', response)
     const responseData = await handleAPIResponse<AuthResponse>(response);
     console.log('signin success',  responseData);
-    navigate('/');
+    navigate('/users/me');
     } catch(error: unknown) {
       if(error instanceof AuthError){
         setErrorMsg('Invalid email or password');

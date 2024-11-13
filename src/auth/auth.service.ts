@@ -16,8 +16,8 @@ export class AuthService {
         const user = await this.userDBService.authUser(signInDto.email, signInDto.password);
         const payload = {email: user.email, username: user.username}
         return{
-          access_token: await this.jwtService.signAsync(payload, {expiresIn: '1h'}),
-          refresh_token: await this.jwtService.signAsync(payload, {expiresIn: '1m'})
+          access_token: await this.jwtService.signAsync(payload, {expiresIn: '4h'}),
+          refresh_token: await this.jwtService.signAsync(payload, {expiresIn: '30d'})
         }
       }catch(error){
         throw error;
