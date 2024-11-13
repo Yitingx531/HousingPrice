@@ -68,6 +68,7 @@ export class UserDBService {
              const userInfoResponse: UserInfoResponseDto = {
                 email: user.email,
                 username: user.username,
+                id: user.id
              }
              return userInfoResponse;
         }catch(error){

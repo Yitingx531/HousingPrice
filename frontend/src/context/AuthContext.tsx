@@ -1,56 +1,88 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useState, ReactNode, useContext } from "react";
+import { AuthError, NetworkError, APIError, handleAPIResponse } from "../types/errorTypes";
 
 type AuthContextType = {
-    accessToken: string | null;
-}
+  isAuthenticated: boolean;
+  signIn: (email: string, password: string) => Promise<void>;
+  error: string | null;
+};
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
-    children: ReactNode;
-  }
+  children: ReactNode;
+}
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
-  const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'));
-  const refreshToken = document.cookie.replace(/(?:(?:^|.*;\s*)refresh_token\s*=\s*([^;]*).*$)|^.*$/, "$1");
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const signIn = async (email: string, password: string) => {
+    setError(null); // Reset error state before attempting sign-in
+    try {
+      const response = await fetch("http://localhost:4000/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include", // Send cookies with the request
+      });
+
+      const data = await handleAPIResponse(response); // Use handleAPIResponse
+
+      setIsAuthenticated(true);
+      scheduleTokenRefresh();
+    } catch (error) {
+        console.log("Caught error:", error); 
+      if (error instanceof AuthError) {
+        setError("Invalid email or password");
+      } else if (error instanceof NetworkError) {
+        setError("Network error. Please try again.");
+      } else if (error instanceof APIError) {
+        setError(`API Error: ${error.message}`);
+      } else {
+        setError("An unknown error occurred.");
+      }
+      console.error("Sign-in error:", error);
+      setIsAuthenticated(false);
+    }
+  };
 
   const refreshAccessToken = async () => {
-    try{
-      const response = await fetch('/auth/refresh', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            refresh_token: refreshToken
-        }) 
-      })
-      if(!response.ok){
-        console.log('Failed to refresh access token')
+    try {
+      const response = await fetch("http://localhost:4000/auth/refresh", {
+        method: "POST",
+        credentials: "include", // Send cookies with the request
+      });
+
+      await handleAPIResponse(response); // Check response with handleAPIResponse
+      setIsAuthenticated(true);
+    } catch (error) {
+      setIsAuthenticated(false);
+      if (error instanceof APIError) {
+        console.error(`API Error during token refresh: ${error.message}`);
+      } else {
+        console.error("Error refreshing token:", error);
       }
-      const data = await response.json();
-      setAccessToken(data.access_token);
-      localStorage.setItem('access_token', data.access_token);
-      scheduleTokenRefresh();
-    }catch(error){
-        console.log(error)
     }
-  }
+  };
 
   const scheduleTokenRefresh = () => {
-    if(!accessToken) return;
-
-    const jwtPayload = JSON.parse(atob(accessToken.split('.')[1]));
-    const expiresInMs = jwtPayload.exp*1000 - Date.now(); // it expires in 1h in our case
-    setTimeout(refreshAccessToken, expiresInMs - 60000);// Refresh to get another access token 1 minute before expiry
-  }
-
-  useEffect(() => {
-    if(accessToken){
-        scheduleTokenRefresh();
-    }
-  }, [accessToken])
+    const refreshAfter = 60 * 60 * 1000 - 60000; // Adjust as needed
+    setTimeout(refreshAccessToken, refreshAfter);
+  };
 
   return (
-    <AuthContext.Provider value={{accessToken}}>
-        {children}
+    <AuthContext.Provider value={{ isAuthenticated, signIn, error }}>
+      {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
+
+// Custom hook to use AuthContext
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

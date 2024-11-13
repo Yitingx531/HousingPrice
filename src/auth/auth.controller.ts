@@ -56,6 +56,7 @@ export class AuthController {
                 maxAge: 4 * 60 * 60 * 1000, // 4 hours
                 sameSite: 'strict',
             })
+            console.log('newaccesstoken', newAccessToken)
             return { message: 'Access token successfully refreshed'}
         } catch(error){
             throw new HttpException('Invalid refresh token', HttpStatus.FORBIDDEN);

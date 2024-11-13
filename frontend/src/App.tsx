@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Layout from './components/common/Layout/Layout';
 import HomePage from './components/HomePage/HomePage';
 import PropertyDetail from './components/PropertyDetailPage/PropertyDetail';
@@ -14,6 +15,7 @@ import Me from './components/Me/Me';
 const App: React.FC = () => {
   return (
     <Router>
+      <AuthProvider>
       <PropertiesProvider>
         <Routes>
           <Route element={<Layout />}>
@@ -28,6 +30,7 @@ const App: React.FC = () => {
           </Route>
         </Routes>
       </PropertiesProvider>
+      </AuthProvider>
     </Router>
   );
 };
