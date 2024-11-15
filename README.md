@@ -63,7 +63,9 @@ Make sure you have the following installed on your machine:
    Import the database dump into your PostgreSQL instance:
 
    ```bash
-   pg_restore -U priceprophet -d price_prophet -v db_backups/database_export.dump
+   docker cp path/db_backups/database_export.dump price_prophet_db:/database_export.dump
+   (Successfully copied 5.07MB to price_prophet_db:/database_export.dump)
+   docker exec -it price_prophet_db pg_restore -U priceprophet -d price_prophet -v /database_export.dump
    ```
 
 7. Run Prisma Migrations
