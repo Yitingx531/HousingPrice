@@ -18,7 +18,7 @@ Make sure you have the following installed on your machine:
 
    ```bash
    git clone https://github.com/your-username/priceprophet.git
-   cd priceprophet
+   cd HousingPrice
    ```
 
 2. Install dependencies:
